@@ -1,0 +1,34 @@
+[{
+	"id": 1,
+	"userId": 1,
+	"cliente":"boliche",
+	"email":"boliche1@boliche1.com",
+	"password":"boliche1",
+	"name":"boliche1",
+	"address":"Av boliche 123",
+	"telephone":"44448888",
+	"celular":"1144448888",
+	"music":"boliche1"
+},{
+	"id": 2,
+	"userId": 2,
+	"cliente":"boliche",
+	"email":"boliche2@boliche2.com",
+	"password":"boliche2",
+	"name":"boliche2",
+	"address":"Av boliche 123",
+	"telephone":"44448888",
+	"celular":"1144448888",
+	"music":"boliche2"
+},{
+	"id": 3,
+	"userId": 3,
+	"cliente":"boliche",
+	"email":"boliche3@boliche3.com",
+	"password":"boliche3",
+	"name":"boliche3",
+	"address":"Av boliche 123",
+	"telephone":"44448888",
+	"celular":"1144448888",
+	"music":"boliche3"
+}]

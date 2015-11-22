@@ -1,0 +1,18 @@
+<p><input type="text" class="form-control" placeholder="Search" ng-model="query"></p>
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <th ng-repeat="field in fields" ng-click="sort(field)">
+        {{ field }}
+        <span ng-show="sort.field === field && !sort.order" class="glyphicon glyphicon-chevron-down"></span>
+        <span ng-show="sort.field === field && sort.order" class="glyphicon glyphicon-chevron-up"></span>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-click="show({{client.id}})" ng-repeat="client in clients ">
+      <td ng-repeat="field in fields | filter: query">
+      {{ client[field] }}</td>
+    </tr>
+  </tbody>
+</table>
