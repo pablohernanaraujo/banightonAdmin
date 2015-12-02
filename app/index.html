@@ -9,6 +9,7 @@
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/angular-toggle-switch/style/bootstrap3/angular-toggle-switch-bootstrap-3.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -23,7 +24,7 @@
     <!-- Add your site or application content here -->
     <div class="header">
       <div class="navbar navbar-default" role="navigation">
-        <div class="container">
+        <div class="container-fluid">
           <div class="navbar-header">
 
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
@@ -47,8 +48,8 @@
       </div>
     </div>
 
-    <div class="container">
-    <div ng-view=""></div>
+    <div class="container-fluid">
+      <div ng-view=""></div>
     </div>
 
     <div class="footer">
@@ -80,6 +81,11 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-toArrayFilter/toArrayFilter.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-toggle-switch/angular-toggle-switch.js"></script>
+    <script src="bower_components/angular-ui-validate/dist/validate.js"></script>
+    <script src="bower_components/angular-input-match/dist/angular-input-match.min.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -87,10 +93,8 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/clients.js"></script>
-        
         <script src="scripts/controllers/about.js"></script>
-        <!-- endbuild 
-        <script src="scripts/controllers/factories.js"></script>
-        -->
+        <script src="scripts/services/password.js"></script>
+        <!-- endbuild -->
 </body>
 </html>

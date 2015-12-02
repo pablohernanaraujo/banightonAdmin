@@ -15,9 +15,14 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'angular-toArrayFilter',
+    'ngMessages',
+    'toggle-switch',
+    'validation.match'
   ])
   .config(function ($routeProvider) {
+
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -28,6 +33,16 @@ angular
         templateUrl: 'views/clients.html',
         controller: 'ClientsCtrl',
         controllerAs: 'clients'
+      })
+      // .when('/clients/:id?', {
+      //   templateUrl: 'views/client.html',
+      //   controller: 'ClientsCtrl',
+      //   controllerAs: 'clients'
+      // })
+      .when('/clients/new', {
+        templateUrl: 'views/new.html',
+        controller: 'NewCtrl',
+        controllerAs: 'new'
       })
       .when('/about', {
         templateUrl: 'views/about.html',
