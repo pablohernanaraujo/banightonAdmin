@@ -19,7 +19,8 @@ angular
     'angular-toArrayFilter',
     'ngMessages',
     'toggle-switch',
-    'validation.match'
+    'validation.match',
+    'ImageCropper'
   ])
   .config(function ($routeProvider) {
 
