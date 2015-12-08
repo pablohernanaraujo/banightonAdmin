@@ -1,1 +1,19 @@
 <h1>MAIN</h1>
+
+<input type="text" id="employeeName" ng-model="employeeName"> 
+<input type="text" id="employeeAge" ng-model="employeeAge">
+<button ng-click="saveEmployee()">save</button>
+<div>
+	<table class="table table-bordered">
+		<thead>
+			<th>Employee Name</th>
+			<th>Age</th>
+			<tbody ng-repeat="employee in employees">
+				<tr>
+					<td>{{employee.employeeName}}</td>
+					<td>{{employee.employeeAge}}</td>
+				</tr>
+			</tbody>
+		</thead>
+	</table>
+</div>

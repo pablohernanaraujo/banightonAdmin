@@ -8,11 +8,95 @@
  * Controller of the banightonAdminApp
  */
 angular.module('banightonAdminApp')
-  .controller('ClientsCtrl', function ($scope, $http, $location, Password) {
-    
-    $scope.$watch('client.password', function(pass){
+  .controller('ClientsCtrl', function ($rootScope, $scope, $http, $location, 
+    Password, clientsService, $route) {
+
+    $scope.myData = new Firebase('https://clientsbnoapp.firebaseio.com/clients');
+
+    $scope.clientId = '';
+    $scope.clientEmail = '';
+    $scope.clientPassword = '';
+    $scope.clientName = '';
+    $scope.clientAddress = '';
+    $scope.clientHomePhone = '';
+    $scope.clientCellPhone = '';
+    $scope.clientMusic = '';
+    $scope.clientAniversary = '';
+
+    $scope.clientBirthday = '';
+
+    $scope.clientWebsite = '';
+    $scope.clientLogo = '';
+    $scope.clientLogoText = '';
+    $scope.clientImage = '';
+    $scope.clientImageText = '';
+
+    $scope.clients = {};
+
+    $scope.myData = new Firebase('https://clientsbnoapp.firebaseio.com/clients');
+
+    $scope.saveClient = function(){
+      
+      $scope.myData.push({
+        clientId:$scope.clientId + 1,
+        clientEmail:$scope.clientEmail,
+        clientPassword:$scope.clientPassword,
+        clientName:$scope.clientName,
+        clientAddress:$scope.clientAddress,
+        clientHomePhone:$scope.clientHomePhone,
+        clientCellPhone:$scope.clientCellPhone,
+        clientMusic:$scope.clientMusic,
+        clientAniversary:$scope.clientAniversary,
+        clientBirthday:$scope.clientBirthday,
+        clientWebsite:$scope.clientWebsite,
+        clientLogo:$scope.clientLogo,
+        clientLogoText:$scope.clientLogoText,
+        clientImage:$scope.clientImage,
+        clientImageText:$scope.clientImageText,
+        clientStatus:0
+      });
+
+      $scope.clientEmail = '';
+      $scope.clientPassword = '';
+      $scope.clientConfirmPassword = '';
+      $scope.clientName = '';
+      $scope.clientAddress = '';
+      $scope.clientHomePhone = '';
+      $scope.clientCellPhone = '';
+      $scope.clientMusic = '';
+      $scope.clientAniversary = '';
+
+      $scope.clientBirthday = '';
+
+      $scope.clientWebsite = '';
+      $scope.clientLogo = '';
+      $scope.clientLogoText = '';
+      $scope.clientImage = '';
+      $scope.clientImageText = '';
+
+      $scope.clientForm.$setPristine();
+      $scope.clientForm.$setUntouched();
+      $scope.clientForm.$setValidity();
+
+      //$route.reload();
+
+    };
+
+    $scope.myData.on('value', function(snapshot){
+      $scope.clients = snapshot.val();
+      $scope.clientId = snapshot.numChildren();
+
+      if ($scope.$root.$$phase !== '$apply' && $scope.$root.$$phase !== '$digest') {
+        $scope.$apply();
+      }
+      
+    });
+
+ 
+
+    $scope.$watch('clientPassword', function(pass){
       $scope.passwordStrength = Password.getStrength(pass);
-      console.log(Password.getStrength(pass));
+      //console.log(Password.getStrength(pass));
 
       if($scope.isPasswordWeak()){
         $scope.clientForm.password.$setValidity('strength', false);
@@ -48,14 +132,14 @@ angular.module('banightonAdminApp')
       return input.$dirty && input.$invalid;
     };
 
-    $http.get('http://banighton.com.ar/bno_php/clients.php')
-      .success(function(data) {
-        $scope.clients = data;
-    });
+    // $http.get('http://banighton.com.ar/bno_php/clients.php')
+    //   .success(function(data) {
+    //     $scope.clients = data;
+    // });
 
     $scope.musics = [];
         
-    $scope.add = function () {
+    $scope.addMusic = function () {
       $scope.musics.push({
         inlineChecked: false,
         question: '',
@@ -63,54 +147,10 @@ angular.module('banightonAdminApp')
         text: ''
       });
     };
-    $scope.remove = function(index){
+    $scope.removeMusic = function(index){
       $scope.musics.splice(index, 1);
     };
 
-    $scope.saveClient = function(){
-      $http({
-        method: 'post',
-        url: 'http://banighton.com.ar/bno_php/addClient.php',
-        data: $.param({'user' : $scope.tempUser, 'type' : 'save_client' }),
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-      }).
-      success(function(data, status, headers, config) {
-        if(data.success){
-          if( $scope.editMode ){
-            $scope.post.users[$scope.index].id = data.id;
-            $scope.post.users[$scope.index].name = $scope.tempUser.name;
-            $scope.post.users[$scope.index].email = $scope.tempUser.email;
-            $scope.post.users[$scope.index].companyName = $scope.tempUser.companyName;
-            $scope.post.users[$scope.index].designation = $scope.tempUser.designation;
-          }else{
-            $scope.post.users.push({
-              id : data.id,
-              name : $scope.tempUser.name,
-              email : $scope.tempUser.email,
-              companyName : $scope.tempUser.companyName,
-              designation : $scope.tempUser.designation
-            });
-          }
-          $scope.messageSuccess(data.message);
-          $scope.userForm.$setPristine();
-          $scope.tempUser = {};
-          
-        }else{
-          $scope.messageFailure(data.message);
-        }
-      }).
-      error(function(data, status, headers, config) {
-          //$scope.codeStatus = response || "Request failed";
-      });
-      
-      $('.btn-save').button('reset');
-    };
-
-    $scope.addClient = function(){
-    
-      $('.btn-save').button('loading');
-      $scope.saveClient();
-    };
 
     $(':file').filestyle({placeholder: 'No file'});
 
@@ -127,6 +167,8 @@ angular.module('banightonAdminApp')
     
     $scope.fileChanged = function(e) {    
       
+      console.log(e);
+
       $('#myModal').modal('toggle');
 
       var files = e.target.files;
@@ -149,4 +191,3 @@ angular.module('banightonAdminApp')
     };
 
   });
-  

@@ -20,8 +20,12 @@ angular
     'ngMessages',
     'toggle-switch',
     'validation.match',
-    'ImageCropper'
+    'ImageCropper',
+    'firebase'
   ])
+  .constant('fire',{
+    url:'https://clientsbnoapp.firebaseio.com'
+  })
   .config(function ($routeProvider) {
 
     $routeProvider

@@ -36,6 +36,8 @@ module.exports = function(config) {
       'bower_components/angular-toggle-switch/angular-toggle-switch.js',
       'bower_components/angular-ui-validate/dist/validate.js',
       'bower_components/angular-input-match/dist/angular-input-match.min.js',
+      'bower_components/firebase/firebase.js',
+      'bower_components/angularfire/dist/angularfire.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",
