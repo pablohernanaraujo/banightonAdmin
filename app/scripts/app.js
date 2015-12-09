@@ -20,8 +20,9 @@ angular
     'ngMessages',
     'toggle-switch',
     'validation.match',
-    'ImageCropper',
-    'firebase'
+    'firebase',
+    'ng-file-model'
+
   ])
   .constant('fire',{
     url:'https://clientsbnoapp.firebaseio.com'

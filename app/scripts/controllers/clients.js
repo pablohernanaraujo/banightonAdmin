@@ -9,82 +9,50 @@
  */
 angular.module('banightonAdminApp')
   .controller('ClientsCtrl', function ($rootScope, $scope, $http, $location, 
-    Password, clientsService, $route) {
+    Password, $route) {
 
     $scope.myData = new Firebase('https://clientsbnoapp.firebaseio.com/clients');
 
-    $scope.clientId = '';
-    $scope.clientEmail = '';
-    $scope.clientPassword = '';
-    $scope.clientName = '';
-    $scope.clientAddress = '';
-    $scope.clientHomePhone = '';
-    $scope.clientCellPhone = '';
-    $scope.clientMusic = '';
-    $scope.clientAniversary = '';
-
-    $scope.clientBirthday = '';
-
-    $scope.clientWebsite = '';
-    $scope.clientLogo = '';
-    $scope.clientLogoText = '';
-    $scope.clientImage = '';
-    $scope.clientImageText = '';
-
+    var ids = 0;
+    
     $scope.clients = {};
 
-    $scope.myData = new Firebase('https://clientsbnoapp.firebaseio.com/clients');
-
-    $scope.saveClient = function(){
-      
+    $scope.saveClient = function(client){
+      client.id = ids++;
+      client.status = 0;
+      //console.log(client);
       $scope.myData.push({
-        clientId:$scope.clientId + 1,
-        clientEmail:$scope.clientEmail,
-        clientPassword:$scope.clientPassword,
-        clientName:$scope.clientName,
-        clientAddress:$scope.clientAddress,
-        clientHomePhone:$scope.clientHomePhone,
-        clientCellPhone:$scope.clientCellPhone,
-        clientMusic:$scope.clientMusic,
-        clientAniversary:$scope.clientAniversary,
-        clientBirthday:$scope.clientBirthday,
-        clientWebsite:$scope.clientWebsite,
-        clientLogo:$scope.clientLogo,
-        clientLogoText:$scope.clientLogoText,
-        clientImage:$scope.clientImage,
-        clientImageText:$scope.clientImageText,
-        clientStatus:0
+        client: client
       });
+      
 
-      $scope.clientEmail = '';
-      $scope.clientPassword = '';
-      $scope.clientConfirmPassword = '';
-      $scope.clientName = '';
-      $scope.clientAddress = '';
-      $scope.clientHomePhone = '';
-      $scope.clientCellPhone = '';
-      $scope.clientMusic = '';
-      $scope.clientAniversary = '';
+      $scope.client.email = '';
+      $scope.client.password = '';
+      $scope.client.confirmPassword = '';
+      $scope.client.name = '';
+      $scope.client.address = '';
+      $scope.client.homePhone = '';
+      $scope.client.cellPhone = '';
+      $scope.client.music = '';
+      $scope.client.aniversary = '';
 
-      $scope.clientBirthday = '';
+      $scope.client.birthday = '';
 
-      $scope.clientWebsite = '';
-      $scope.clientLogo = '';
-      $scope.clientLogoText = '';
-      $scope.clientImage = '';
-      $scope.clientImageText = '';
+      $scope.client.website = '';
+      $scope.client.logo = '';
+      $scope.client.logoText = '';
+      $scope.client.image = '';
+      $scope.client.imageText = '';
 
       $scope.clientForm.$setPristine();
       $scope.clientForm.$setUntouched();
       $scope.clientForm.$setValidity();
 
-      //$route.reload();
-
     };
 
     $scope.myData.on('value', function(snapshot){
       $scope.clients = snapshot.val();
-      $scope.clientId = snapshot.numChildren();
+      ids = snapshot.numChildren();
 
       if ($scope.$root.$$phase !== '$apply' && $scope.$root.$$phase !== '$digest') {
         $scope.$apply();
@@ -92,9 +60,7 @@ angular.module('banightonAdminApp')
       
     });
 
- 
-
-    $scope.$watch('clientPassword', function(pass){
+    $scope.$watch('client.password', function(pass){
       $scope.passwordStrength = Password.getStrength(pass);
       //console.log(Password.getStrength(pass));
 
@@ -132,11 +98,6 @@ angular.module('banightonAdminApp')
       return input.$dirty && input.$invalid;
     };
 
-    // $http.get('http://banighton.com.ar/bno_php/clients.php')
-    //   .success(function(data) {
-    //     $scope.clients = data;
-    // });
-
     $scope.musics = [];
         
     $scope.addMusic = function () {
@@ -165,29 +126,4 @@ angular.module('banightonAdminApp')
       
     };
     
-    $scope.fileChanged = function(e) {    
-      
-      console.log(e);
-
-      $('#myModal').modal('toggle');
-
-      var files = e.target.files;
-    
-      var fileReader = new FileReader();
-      fileReader.readAsDataURL(files[0]);   
-      
-      fileReader.onload = function(e) {
-        $scope.imgSrc = this.result;
-        $scope.$apply();
-      };
-      
-    };   
-     
-    $scope.clear = function() {
-       $scope.imageCropStep = 1;
-       delete $scope.imgSrc;
-       delete $scope.result;
-       delete $scope.resultBlob;
-    };
-
   });

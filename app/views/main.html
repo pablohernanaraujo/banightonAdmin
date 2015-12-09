@@ -1,19 +1,16 @@
 <h1>MAIN</h1>
 
-<input type="text" id="employeeName" ng-model="employeeName"> 
-<input type="text" id="employeeAge" ng-model="employeeAge">
-<button ng-click="saveEmployee()">save</button>
-<div>
-	<table class="table table-bordered">
-		<thead>
-			<th>Employee Name</th>
-			<th>Age</th>
-			<tbody ng-repeat="employee in employees">
-				<tr>
-					<td>{{employee.employeeName}}</td>
-					<td>{{employee.employeeAge}}</td>
-				</tr>
-			</tbody>
-		</thead>
-	</table>
+<form ng-submit="submit(obj)">
+  <input type="file" ng-file-model="obj.logo" />
+  <input type="file" ng-file-model="obj.image" />
+  <input type="submit"  value="submit" accept="image/*"/>
+</form>
+
+
+<div ng-repeat="imagen in imagenes">
+	<img ng-src="{{imagen.clientLogo.data}}" alt="{{imagen.clientLogo.name}}">
+	<img ng-src="{{imagen.clientImage.data}}" alt="{{imagen.clientImage.name}}">
+	<div>{{imagen.clientLogo.name}}</div>
+	<div>{{imagen.clientImage.name}}</div>
 </div>
+

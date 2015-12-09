@@ -17,7 +17,7 @@
 
         <div class="form-group has-feedback" ng-class="{'has-error':clientForm.email.$dirty && clientForm.email.$invalid, 'has-success':clientForm.email.$valid && clientForm.email.$dirty}">
           <label for="email">Email</label>
-          <input type="email" class="form-control" id="email" name="email" placeholder="Email" data-ng-model="clientEmail" required>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Email" data-ng-model="client.email" required>
           <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="clientForm.email.$dirty && clientForm.email.$invalid"></span>
           <span class="glyphicon glyphicon glyphicon-ok form-control-feedback" ng-show="clientForm.email.$valid && clientForm.email.$dirty"></span>
         </div>
@@ -28,7 +28,7 @@
         <div class="form-group has-feedback" ng-class="{'has-error': isInputInvalid(clientForm.password), 'has-success': isInputValid(clientForm.password)}"
             >
           <label for="password">Password</label> 
-          <input type="password" class="form-control" id="password" name="password" placeholder="Password" ng-model="clientPassword" required>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password" ng-model="client.password" required>
           <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="clientForm.password.$dirty && clientForm.password.$invalid"></span>
           <span class="glyphicon glyphicon glyphicon-ok form-control-feedback" ng-show="clientForm.password.$valid && clientForm.password.$dirty"></span>
           <div class="progress" style="margin-top:5px">
@@ -45,7 +45,7 @@
     
         <div class="form-group has-feedback" ng-class="{'has-error':clientForm.confirmPassword.$dirty && clientForm.confirmPassword.$error.match, 'has-success':!clientForm.confirmPassword.$error.match && clientForm.confirmPassword.$dirty}">
           <label for="confirmPassword">Confirm Password</label> 
-          <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" ng-model="clientConfirmPassword" match="clientPassword" not-match="true">
+          <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" ng-model="client.confirmPassword" match="client.password" not-match="true">
           <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="clientForm.confirmPassword.$dirty && clientForm.confirmPassword.$error.match"></span>
           <span class="glyphicon glyphicon glyphicon-ok form-control-feedback" ng-show="!clientForm.confirmPassword.$error.match && clientForm.confirmPassword.$dirty"></span>
         </div>
@@ -53,149 +53,86 @@
       
         <div class="form-group">
           <label for="name">Name</label> 
-          <input type="text" class="form-control" id="name" name="name" placeholder="Name" ng-model="clientName">
+          <input type="text" class="form-control" id="name" name="name" placeholder="Name" ng-model="client.name">
         </div>
         <div class="form-group" ng-show="!switchStatus">
           <label for="address">Address</label> 
-          <input type="text" class="form-control" id="address" name="address" placeholder="Address" ng-model="clientAddress">
+          <input type="text" class="form-control" id="address" name="address" placeholder="Address" ng-model="client.address">
         </div>
         
         <div class="form-group has-feedback" ng-show="!switchStatus">
           <label for="homePhone">Home Phone</label> 
-          <input type="text" class="form-control" id="homePhone" name="homePhone" placeholder="Home Phone" ng-model="clientHomePhone">
+          <input type="text" class="form-control" id="homePhone" name="homePhone" placeholder="Home Phone" ng-model="client.homePhone">
         </div>
+
         <div class="form-group">
           <label for="cellPhone">Cell Phone</label> 
-          <input type="text" class="form-control" id="cellPhone" name="cellPhone" placeholder="Cell Phone" ng-model="clientCellPhone">
+          <input type="text" class="form-control" id="cellPhone" name="cellPhone" placeholder="Cell Phone" ng-model="client.cellPhone">
         </div>
 
         <div class="form-group">
           <label for="music">Music</label>
           <div class="input-group">
-            <input type="text" class="form-control" id="music" name="music" placeholder="Music" ng-model="clientMusic">
+            <input type="text" class="form-control" id="music" name="music" placeholder="Music" ng-model="client.music">
             <span class="input-group-btn" style="top:-1px">
               <button class="btn btn-default glyphicon glyphicon-plus" type="button" ng-click="addMusic()"></button>
             </span>
           </div>
-          
         </div>
+
         <div class="form-group" ng-repeat="music in musics">
           <div class="input-group">
-
-            <input type="text" class="form-control" id="music" name="music" placeholder="{{music.questionPlaceholder}}" ng-model="musicMore">
+            <input type="text" class="form-control" id="musicMore" name="musicMore" placeholder="{{music.questionPlaceholder}}" ng-model="musicMore">
             <span class="input-group-btn" style="top:-1px">
               <button class="btn btn-default glyphicon glyphicon-remove btn-danger" type="button" ng-click="removeMusic($index)"></button>
             </span>
           </div>
         </div>   
          
-
         <div class="form-group" ng-show="!switchStatus">
           <label for="aniversary">Aniversary</label> 
-          <input type="text" class="form-control" id="aniversary" name="aniversary" placeholder="yyyy-mm-dd" ng-model="clientAniversary">
+          <input type="text" class="form-control" id="aniversary" name="aniversary" placeholder="yyyy-mm-dd" ng-model="client.aniversary">
         </div>
         <div class="form-group" ng-show="switchStatus">
           <label for="birthday">Birthday</label> 
-          <input type="text" class="form-control" id="birthday" name="birthday" placeholder="yyyy-mm-dd" ng-model="clientBirthday">
+          <input type="text" class="form-control" id="birthday" name="birthday" placeholder="yyyy-mm-dd" ng-model="client.birthday">
         </div>
         <div class="form-group">
           <label for="website">Website</label> 
-          <input type="url" class="form-control" id="website" name="website" placeholder="http://example.com" ng-model="clientWebsite">
+          <input type="url" class="form-control" id="website" name="website" placeholder="http://example.com" ng-model="client.website">
         </div>
-
-        <!--<div class="form-group" ng-show="imageCropStep == 1">
-          <label for="logo">logo</label>
-          <div class="input-group">
-            <span class="input-group-btn" style="top:-1px">
-              <button class="btn btn-default glyphicon glyphicon-remove" type="button" ng-click="eliminarArchivo('logo')"></button>
-            </span>
-            <input class="filestyle" type="file" name="logo" id="logo" onchange="angular.element(this).scope().fileChanged(event)" ng-model="clienteLogo" data-placeholder="No file" accept="image/*">
-          </div>
-        </div>     
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">logo</h4>
-              </div>
-              <div class="modal-body">
-                <div class="" ng-show="imageCropStep == 2">
-                   <image-crop       
-                   data-height="200" //shape's height
-                   data-width="150" //shape's width
-                   data-shape="square" //the shape.. square or circle
-                   data-step="imageCropStep"//scope variable that will contain the current step of the crop (1. Waiting for source image; 2. Image loaded, waiting for crop; 3. Crop done)
-                   src="imgSrc" //scope variable that will be the source image for the crop (may be a Blob or base64 string)
-                   data-result-blob="result" //scope variable that will contain the Blob information
-                   data-result="resultDataUrl" //scope variable that will contain the image's base64 string representation
-                   crop="initCrop" //scope variable that must be set to true when the image is ready to be cropped
-                   padding="250" //space, in pixels, rounding the shape
-                   max-size="1024" //max of the image, in pixels
-                   ></image-crop>                   
-                  <image-crop       
-                  data-height="100"
-                  data-width="100"
-                  data-shape="square"
-                  data-step="imageCropStep"
-                  src="imgSrc"
-                  data-result="result"
-                  data-result-blob="resultBlob"
-                  crop="initCrop"
-                  padding="250"
-                  max-size="1024"
-                  ></image-crop>      
-                </div>
-              </div>
-              <div class="modal-footer" ng-show="imageCropStep == 2">
-                <button class="btn btn-default" data-dismiss="modal" ng-click="clear()">Cancel</button>
-                <button class="btn btn-primary" data-dismiss="modal" ng-click="initCrop = true">Crop</button>
-              </div>
-            </div> /.modal-content 
-          </div> /.modal-dialog 
-        </div> /.modal --> 
 
         <div class="form-group">
-          <label for="logo">logo</label> 
+          <label for="logo">logo <small>100x100</small></label> 
           <div class="input-group">
             <span class="input-group-btn" style="top:-1px">
               <button class="btn btn-default glyphicon glyphicon-remove" type="button" ng-click="eliminarArchivo('logo')"></button>
             </span>
-            <input type="file" id="logo" name="logo" ng-model="clientLogo" data-iconName="glyphicon glyphicon-inbox" accept="image/*">
+            <input type="file" id="logo" name="logo" ng-file-model="client.logo" data-iconName="glyphicon glyphicon-inbox" accept="image/*">
           </div>
         </div> 
-
-        <div class="form-group" ng-show="imageCropStep == 3">
-          <label for="logo">logo result</label><br/>
-          <img ng-src="{{result}}" class="img-thumbnail"></img>
-          <textarea type="text" class="form-control"  rows="3">{{ result }}</textarea> 
-        </div>
-        <div class="form-group" ng-show="imageCropStep == 3">
-          <div class="text-center">
-            <button class="btn btn-default btn-block" ng-click="clear()">Clear</button>
-          </div>
-        </div>
       
         <div class="form-group">
           <label for="logotext">logotext</label> 
-          <input class="form-control" id="logotext" name="logotext" placeholder="logotext" ng-model="clientLogoText">
+          <input class="form-control" id="logotext" name="logotext" placeholder="logotext" ng-model="client.logoText">
         </div>
         <div class="form-group">
-          <label for="imagen">imagen</label> 
+          <label for="imagen">imagen <small>400x600</small></label> 
           <div class="input-group">
             <span class="input-group-btn" style="top:-1px">
               <button class="btn btn-default glyphicon glyphicon-remove" type="button" ng-click="eliminarArchivo('image')"></button>
             </span>
-            <input type="file" id="image" name="image" ng-model="clientImage" data-iconName="glyphicon glyphicon-inbox" accept="image/*">
+            <input type="file" id="image" name="image" ng-file-model="client.image" data-iconName="glyphicon glyphicon-inbox" accept="image/*">
           </div>
         </div>   
 
         <div class="form-group">
           <label for="imagenText">imagenText</label> 
-          <textarea type="text" class="form-control" id="imagenText" name="imagenText" placeholder="imagenText" rows="3" ng-model="clientImageText"></textarea>
+          <textarea type="text" class="form-control" id="imagenText" name="imagenText" placeholder="imagenText" rows="3" ng-model="client.imageText"></textarea>
         </div>
         <div class="form-group">
           <div class="text-center">
-            <button data-loading-text="Saving Client..." type="submit" class="btn btn-save btn-block" ng-click="saveClient()" ng-disabled="clientForm.$invalid">Save Client</button>
+            <button data-loading-text="Saving Client..." type="submit" class="btn btn-save btn-block" ng-click="saveClient(client)" ng-disabled="clientForm.$invalid">Save Client</button>
           </div>
         </div>
         
@@ -219,10 +156,10 @@
           <tbody>
 
             <tr ng-repeat="client in clients">
-              <th>{{client.clientId}}</th>
-              <td>{{client.clientName}}</td>
-              <td>{{client.clientAddress}}</td>
-              <td>{{client.clientEmail}}</td>
+              <th>{{client.client.id}}</th>
+              <td>{{client.client.name}}</td>
+              <td>{{client.client.address}}</td>
+              <td>{{client.client.email}}</td>
             </tr>
           </tbody>
         </table>
