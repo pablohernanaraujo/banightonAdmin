@@ -59,11 +59,57 @@ body {
   margin-top: 28px;
 }
 
-.cropArea {
-  background: #E4E4E4;
-  overflow: hidden;
-  width:500px;
-  height:350px;
+.pie{
+  width: 100%;
+  height: 40px;
+  text-align: center;
+  border-top: 1px solid #E5E5E5;
+  color:#CCC;
+  position: fixed;
+  bottom: 0;
+  background-color: white;
+}
+
+.pie span{
+  line-height: 35px;
+}
+
+.extraPie{
+  width: 100%;
+  height: 40px;
+  //background-color: red;
+}
+
+.color1{
+  background-color: red;
+}
+
+.table-curved {
+   border-collapse: separate;
+   border: solid #ddd 1px;
+   border-radius: 6px;
+   border-left: 0px;
+   border-top: 0px;
+}
+.table-curved > thead:first-child > tr:first-child > th {
+    border-bottom: 0px;
+    border-top: solid #ddd 1px;
+}
+.table-curved td, .table-curved th {
+    border-left: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+}
+.table-curved > :first-child > :first-child > :first-child {
+    border-top-left-radius: 6px;
+}
+.table-curved > :first-child > :first-child > :last-child {
+    border-top-right-radius: 6px;
+}
+.table-curved > :last-child > :last-child > :first-child {
+    border-bottom-left-radius: 6px;
+}
+.table-curved > :last-child > :last-child > :last-child {
+    border-bottom-right-radius: 6px;
 }
 
 /* Responsive: Portrait tablets and up */
