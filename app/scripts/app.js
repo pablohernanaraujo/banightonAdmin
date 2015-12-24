@@ -22,11 +22,11 @@ angular
     'validation.match',
     'firebase',
     'ng-file-model',
-    'siTable'
+    'ui.bootstrap'
   ])
   .constant('fire',{
-      users :'https://usersbnoapp.firebaseio.com',
-      clients : 'https://clientsbnoapp.firebaseio.com'
+      'users' :'https://usersbnoapp.firebaseio.com',
+      'clients' : 'https://clientsbnoapp.firebaseio.com'
     })
   .run(['$rootScope', '$location',
     function($rootScope, $location){
@@ -56,23 +56,18 @@ angular
           }
         }
       })
-      // .when('/clients/:id?', {
-      //   templateUrl: 'views/client.html',
-      //   controller: 'ClientsCtrl',
-      //   controllerAs: 'clients'
-      // })
       .when('/users', {
         templateUrl: 'views/users.html',
-        controller: 'UsersCtrl',
-        controllerAs: 'users',
+        controller: 'LoginCtrl',
+        controllerAs: 'login',
         resolve: {
           currentAuth: function(Authentication){
             return Authentication.requireAuth();
           }
         }
       })
-      .when('/register', {
-        templateUrl: 'views/register.html',
+      .when('/users/:uId', {
+        templateUrl: 'views/user.html',
         controller: 'LoginCtrl',
         controllerAs: 'login',
         resolve: {

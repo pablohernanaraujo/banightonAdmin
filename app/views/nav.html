@@ -17,10 +17,9 @@
         
         <li data-toggle="pill"><a ng-href="#/clients">Clientes</a></li>
         <li data-toggle="pill"><a ng-href="#/users">Users</a></li>
-        <li data-toggle="pill"><a ng-href="#/register">Register</a></li>
       </ul>
       <div ng-controller="LoginCtrl"  class="nav pull-right">
-        <span class="navbar-brand">{{currentUser.firstname}}</span>
+        <span class="navbar-brand">{{currentUser.user.firstname}}</span>
         <button type="button" class="navbar-brand btn btn-link glyphicon glyphicon-log-out" ng-click="userLogout()"></button>
       </div>
       

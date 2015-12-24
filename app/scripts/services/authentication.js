@@ -2,9 +2,10 @@
 
 
 angular.module('banightonAdminApp')
-    .factory('Authentication',['$rootScope', '$firebaseAuth', 'fire', '$location', '$firebaseObject', 
-    	function($rootScope, $firebaseAuth, fire, $location, $firebaseObject) {
+    .factory('Authentication',['$rootScope', '$firebaseAuth', 'fire', '$location', '$firebaseObject', '$firebaseArray', '$timeout', 
+    	function($rootScope, $firebaseAuth, fire, $location, $firebaseObject, $firebaseArray, $timeout) {
 
+    	var refUsers = new Firebase(fire.users + '/users'); 
     	var ref = new Firebase(fire.users);
     	var auth = $firebaseAuth(ref);
 
@@ -19,6 +20,14 @@ angular.module('banightonAdminApp')
     	});
 
     	return {
+    		online: function(){
+    			refUsers.on('value',function(snapshot){
+			    	$timeout(function() {
+				    	var users = snapshot.val();
+			    		$rootScope.users = users;
+				    }, 0);
+			    });
+    		},
     		login: function(user){
     			auth.$authWithPassword({
     				email: user.email,
@@ -31,6 +40,7 @@ angular.module('banightonAdminApp')
     		},
 
     		logout: function(){
+    			$location.path('/');
     			return auth.$unauth();
     		},
 
@@ -45,20 +55,34 @@ angular.module('banightonAdminApp')
 		  		}).then(function(regUser){
 
 		  			var regRef = new Firebase(fire.users + '/users').child(regUser.uid).set({
-		  				date: Firebase.ServerValue.TIMESTAMP,
-		  				regUser: regUser.uid,
+		  				user:{
+		  					date: Firebase.ServerValue.TIMESTAMP,
+			  				regUser: regUser.uid,
+			  				firstname: user.firstname,
+			  				lastname: user.lastname,
+			  				nivel: user.nivel,
+			  				email: user.email,
+			  				status: 1
+		  				}
+		  			});
+		  			$rootScope.message = 'Registering ' + user.firstname;
+		  		}).catch(function(error){
+		  			$rootScope.message = error.message;
+		  		});
+    		},
+    		update: function (user) {
+    			console.log(user);
+			    var regUser = new Firebase(fire.users + '/users').child(user).set({
+	  				user:{
 		  				firstname: user.firstname,
 		  				lastname: user.lastname,
 		  				nivel: user.nivel,
 		  				email: user.email,
-		  				status: 1
-		  			});
+		  				status: user.status
+	  				}
+	  			});
+			}
 
-		  			$rootScope.message = 'Hi ' + user.firstname + ', Thanks for registering';
-		  		}).catch(function(error){
-		  			$rootScope.message = error.message;
-		  		});
-    		}
     	};
 
     }]);

@@ -41,6 +41,7 @@ module.exports = function(config) {
       'bower_components/ng-file-model/ng-file-model.js',
       'bower_components/si-table/dist/si-table.js',
       'bower_components/bootstrap-table/src/bootstrap-table.js',
+      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

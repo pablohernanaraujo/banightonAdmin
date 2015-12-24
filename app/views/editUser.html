@@ -1,0 +1,54 @@
+<div class="modal-header">
+	<h2>Edit</h2>
+	<p>Edit the information user</p>
+	<p class="message" ng-show="message">{{ message }}</p>
+	<p>{{user}}</p>
+</div>
+<div class="modal-body">
+	<form name="myform"
+		ng-submit="update(user)"
+		novalidate>
+		
+		<div class="form-group has-feedback" ng-class="{'has-error':myform.firstname.$dirty && myform.firstname.$invalid, 'has-success':myform.firstname.$valid && myform.firstname.$dirty}">
+			<input type="text" name="firstname" placeholder="First Name" ng-model="user.firstname" required class="form-control">
+			<span class="glyphicon glyphicon-remove form-control-feedback" ng-show="myform.firstname.$dirty && myform.firstname.$invalid"></span>
+			<span class="glyphicon glyphicon glyphicon-ok form-control-feedback" ng-show="myform.firstname.$valid && myform.firstname.$dirty"></span>
+		</div>
+		
+		<div class="form-group has-feedback" ng-class="{'has-error':myform.lastname.$dirty && myform.lastname.$invalid, 'has-success':myform.lastname.$valid && myform.lastname.$dirty}">
+			<input type="text" name="lastname" placeholder="Last Name" ng-model="user.lastname" required class="form-control">
+			<span class="glyphicon glyphicon-remove form-control-feedback" ng-show="myform.lastname.$dirty && myform.lastname.$invalid"></span>
+			<span class="glyphicon glyphicon glyphicon-ok form-control-feedback" ng-show="myform.lastname.$valid && myform.lastname.$dirty"></span>
+		</div>
+		
+		<div class="form-group has-feedback" ng-class="{'has-error':myform.nivel.$dirty && myform.nivel.$invalid, 'has-success':myform.nivel.$valid && myform.nivel.$dirty}">
+			<input type="text" name="nivel" placeholder="Nivel" ng-model="user.nivel" required class="form-control">
+			<span class="glyphicon glyphicon-remove form-control-feedback" ng-show="myform.nivel.$dirty && myform.nivel.$invalid"></span>
+			<span class="glyphicon glyphicon glyphicon-ok form-control-feedback" ng-show="myform.nivel.$valid && myform.nivel.$dirty"></span>
+		</div>
+
+		<div class="form-group has-feedback" ng-class="{'has-error':myform.email.$dirty && myform.email.$invalid, 'has-success':myform.email.$valid && myform.email.$dirty}">
+			<input type="email" class="form-control" id="email" name="email" placeholder="Email" data-ng-model="user.email" required>
+			<span class="glyphicon glyphicon-remove form-control-feedback" ng-show="myform.email.$dirty && myform.email.$invalid"></span>
+			<span class="glyphicon glyphicon glyphicon-ok form-control-feedback" ng-show="myform.email.$valid && myform.email.$dirty"></span>
+		</div>
+
+		<div class="form-group has-feedback" ng-class="{'has-error':myform.status.$dirty && myform.status.$invalid, 'has-success':myform.status.$valid && myform.status.$dirty}">
+			<input type="text" name="status" placeholder="status" ng-model="user.status" required class="form-control">
+			<span class="glyphicon glyphicon-remove form-control-feedback" ng-show="myform.status.$dirty && myform.status.$invalid"></span>
+			<span class="glyphicon glyphicon glyphicon-ok form-control-feedback" ng-show="myform.status.$valid && myform.status.$dirty"></span>
+		</div>
+
+	    <div class="form-group">
+		    <button type="submit" class="btn btn-save btn-primary btn-block"
+		    	ng-disabled="myform.$invalid">Edit Data
+		    </button>
+	    </div>
+	</form>
+</div>
+<div class="modal-footer">
+    
+    <button  class="btn btn-danger btn-block"
+    	ng-click="cancel()">Close
+    </button>
+</div>

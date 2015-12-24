@@ -20,7 +20,7 @@ angular.module('banightonAdminApp')
     $scope.saveClient = function(client){
       client.id = ids++;
       client.status = 0;
-      //console.log(client);
+      console.log(client);
       $scope.myData.push({
         client: client
       });
