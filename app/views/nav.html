@@ -15,8 +15,9 @@
 
       <ul class="nav navbar-nav">
         
-        <li data-toggle="pill"><a ng-href="#/clients">Clientes</a></li>
-        <li data-toggle="pill"><a ng-href="#/users">Users</a></li>
+        <li ng-class="{ active: PAGE === 'clients'}"><a ng-href="#/clients">Clients</a></li>
+        <li ng-class="{ active: PAGE === 'users'}"><a ng-href="#/users">Users</a></li>
+        <li ng-class="{ active: PAGE === 'delete'}"><a ng-href="#/delete">Delete</a></li>
       </ul>
       <div ng-controller="LoginCtrl"  class="nav pull-right">
         <span class="navbar-brand">{{currentUser.user.firstname}}</span>

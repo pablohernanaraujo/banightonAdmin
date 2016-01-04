@@ -112,6 +112,55 @@ body {
     border-bottom-right-radius: 6px;
 }
 
+.ng-leave {
+  transition:0.3s linear all;
+  opacity:1;
+}
+.ng-leave.ng-leave-active {
+  opacity:0;
+}
+
+.ng-enter {
+  transition:0.3s linear all 0.4s;
+  opacity:0;
+}
+.ng-enter.ng-enter-active {
+  opacity:1;
+}
+
+#map { 
+    height: 400px;
+    margin: 20px 0;
+    border-radius: 5px;
+    border: 1px solid silver;
+}
+
+.divisor{
+  border-top: 1px solid silver;
+  border-bottom: 1px solid silver;
+  width: 100%;
+  height: 40px;
+  margin-top:5px;
+  margin-bottom: 10px;
+  line-height: 38px;
+  color: silver;
+}
+
+.imagen{
+  padding: 5px;
+  float: left;
+  box-sizing :border-box;
+  -o-box-sizing :border-box;
+  -ms-box-sizing :border-box;
+  -moz-box-sizing :border-box;
+  -webkit-box-sizing : border-box;
+}
+.imagenDatos{
+  margin-left: 15px;
+  float: left;
+  
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .container {

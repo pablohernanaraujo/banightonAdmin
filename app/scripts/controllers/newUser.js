@@ -3,6 +3,8 @@
 angular.module('banightonAdminApp')
   .controller('NewUserCtrl',['$scope', '$uibModalInstance', 'Authentication', function ($scope, $uibModalInstance, Authentication) {
 
+    $scope.user = {'nivel' : '1'};
+
   	$scope.register = function(){
   		Authentication.register($scope.user);
   	};
@@ -19,7 +21,7 @@ angular.module('banightonAdminApp')
 
       $scope.user.firstname = '';
       $scope.user.lastname = '';
-      $scope.user.nivel = '';
+      $scope.user.nivel = '1';
       $scope.user.email = '';
       $scope.user.password = '';
     };

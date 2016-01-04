@@ -1,0 +1,22 @@
+<div class="modal-header">
+	<h2>Active</h2>
+	<p>Active or unactive user</p>
+</div>
+<div class="modal-body">
+	
+	<div class="form-group">
+		<select class="form-control"
+		ng-model="user.status"
+		ng-change="user.$save()"
+		>
+		    <option value="0">not active</option>
+		    <option value="1">active</option>
+		</select>
+	</div>
+</div>
+<div class="modal-footer">
+    
+    <button  class="btn btn-primary btn-block"
+    	ng-click="cancel()">Close
+    </button>
+</div>

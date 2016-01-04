@@ -21,12 +21,24 @@ angular.module('banightonAdminApp')
 
     	return {
     		online: function(){
-    			refUsers.on('value',function(snapshot){
-			    	$timeout(function() {
-				    	var users = snapshot.val();
-			    		$rootScope.users = users;
-				    }, 0);
-			    });
+    			$rootScope.dataLoading = true;
+    			var users = $firebaseArray(refUsers);
+    			$rootScope.users = users;
+    			$rootScope.dataLoading = false;
+    		},
+    		onlineActive: function(){
+    			
+    			refUsers.on('value', function(snap){
+    				var users = snap.val();
+    				var filtered = [];
+    				angular.forEach(users, function(value) {
+						if(value.user.status === '0'){
+					 		filtered.push(value);
+						}
+					});
+					$rootScope.notActiveUsers = filtered;
+    			});
+    			
     		},
     		login: function(user){
     			auth.$authWithPassword({
@@ -62,27 +74,14 @@ angular.module('banightonAdminApp')
 			  				lastname: user.lastname,
 			  				nivel: user.nivel,
 			  				email: user.email,
-			  				status: 1
+			  				status: '1'
 		  				}
 		  			});
 		  			$rootScope.message = 'Registering ' + user.firstname;
 		  		}).catch(function(error){
 		  			$rootScope.message = error.message;
 		  		});
-    		},
-    		update: function (user) {
-    			console.log(user);
-			    var regUser = new Firebase(fire.users + '/users').child(user).set({
-	  				user:{
-		  				firstname: user.firstname,
-		  				lastname: user.lastname,
-		  				nivel: user.nivel,
-		  				email: user.email,
-		  				status: user.status
-	  				}
-	  			});
-			}
-
+    		}
     	};
 
     }]);

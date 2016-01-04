@@ -66,10 +66,10 @@ angular
           }
         }
       })
-      .when('/users/:uId', {
-        templateUrl: 'views/user.html',
-        controller: 'LoginCtrl',
-        controllerAs: 'login',
+      .when('/delete', {
+        templateUrl: 'views/delete.html',
+        controller: 'DeleteCtrl',
+        controllerAs: 'delete',
         resolve: {
           currentAuth: function(Authentication){
             return Authentication.requireAuth();

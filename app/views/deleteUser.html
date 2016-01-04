@@ -1,0 +1,26 @@
+<div class="modal-header">
+	<h2>Delete</h2>
+	<p>You sure want delete user?</p>
+</div>
+<div class="modal-body">
+	<form name="myform"
+		novalidate>
+		
+		<div ng-show="user !== ''" class="form-group">
+			{{user.firstname}}
+		</div>
+		<div ng-show="user === ''"class="form-group">
+			The user will by delete!
+		</div>
+	</form>
+	<button ng-show="user !== ''"  class="btn btn-danger btn-block"
+    	ng-click="user.$remove('{{user}}')">Delete
+    </button>
+
+</div>
+<div class="modal-footer">
+    
+    <button  class="btn btn-primary btn-block"
+    	ng-click="cancel()">Close
+    </button>
+</div>

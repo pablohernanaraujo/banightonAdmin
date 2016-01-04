@@ -8,7 +8,10 @@
  * Controller of the banightonAdminApp
  */
 angular.module('banightonAdminApp')
-  .controller('LoginCtrl',['$scope', '$uibModal', 'Authentication', function ($scope, $uibModal, Authentication) {
+  .controller('LoginCtrl',['$scope', '$rootScope', '$uibModal', 'Authentication', 
+    function ($scope, $rootScope, $uibModal, Authentication) {
+
+    $rootScope.PAGE = 'users';
   	
     Authentication.online();
 
@@ -30,8 +33,7 @@ angular.module('banightonAdminApp')
       $scope.myform.$setValidity();
     };
 
-    $scope.modal = function(where, user){
-      console.log(where, user);
+    $scope.modal = function(where, user, size){
       if(where === 'newUser'){
         $uibModal.open({
           templateUrl: 'views/newUser.html',
@@ -52,10 +54,30 @@ angular.module('banightonAdminApp')
       if(where === 'activeUser'){
         $uibModal.open({
           templateUrl: 'views/activeUser.html',
-          controller: 'ActiveUserCtrl'
+          controller: 'ActiveUserCtrl',
+          size: size,
+          resolve: {
+            activeUser: function () {
+              return user;
+            }
+          }
         });
       }
-      
+      if(where === 'deleteUser'){
+        $uibModal.open({
+          templateUrl: 'views/deleteUser.html',
+          controller: 'DeleteUserCtrl',
+          size: size,
+          resolve: {
+            deleteUser: function () {
+              return user;
+            }
+          }
+        });
+      }
     };
 
+    $scope.pageSize = 5;
+    $scope.currentPage = 1;
+    
   }]);

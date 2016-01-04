@@ -1,0 +1,238 @@
+<div class="modal-header">
+  <h2>New Client</h2>
+  <p>To access site features</p>
+  <p class="message" ng-show="message">{{ message }}</p>
+</div>
+<div class="modal-body">
+  
+
+  <form name="clientForm"
+    ng-submit="register()"
+    novalidate>
+
+    <div class="form-group">
+      <label for="client">Type of client</label>
+      <select class="form-control"
+      name="client" 
+      ng-model="client.client"
+      >
+         <option value="Boliche">Boliche</option>
+         <option value="Dj">Dj</option>
+      </select>
+    </div>
+
+    <div class="form-group has-feedback" ng-class="{'has-error':clientForm.email.$dirty && clientForm.email.$invalid, 'has-success':clientForm.email.$valid && clientForm.email.$dirty}">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" name="email" placeholder="Email" data-ng-model="client.email" required>
+      <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="clientForm.email.$dirty && clientForm.email.$invalid"></span>
+      <span class="glyphicon glyphicon glyphicon-ok form-control-feedback" ng-show="clientForm.email.$valid && clientForm.email.$dirty"></span>
+    </div>
+
+      
+    <div class="form-group has-feedback" ng-class="{'has-error': isInputInvalid(clientForm.password), 'has-success': isInputValid(clientForm.password)}"
+        >
+      <label for="password">Password</label> 
+      <input type="password" class="form-control" id="password" name="password" placeholder="Password" ng-model="client.password" required>
+      <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="clientForm.password.$dirty && clientForm.password.$invalid"></span>
+      <span class="glyphicon glyphicon glyphicon-ok form-control-feedback" ng-show="clientForm.password.$valid && clientForm.password.$dirty"></span>
+      <div class="progress" style="margin-top:5px">
+        <div class="progress-bar"
+              ng-class="{'progress-bar-success': isPasswordStrong(), 'progress-bar-warning': isPasswordOk(), 'progress-bar-danger': isPasswordWeak()}"
+              aria-valuenow="{{passwordStrength}}"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              style="width:{{passwordStrength}}%">
+        </div>
+      </div>
+    </div>
+  
+    <div class="form-group has-feedback" ng-class="{'has-error':clientForm.confirmPassword.$dirty && clientForm.confirmPassword.$error.match, 'has-success':!clientForm.confirmPassword.$error.match && clientForm.confirmPassword.$dirty}">
+      <label for="confirmPassword">Confirm Password</label> 
+      <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" ng-model="clientConfirmPassword" match="client.password" not-match="true">
+      <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="clientForm.confirmPassword.$dirty && clientForm.confirmPassword.$error.match"></span>
+      <span class="glyphicon glyphicon glyphicon-ok form-control-feedback" ng-show="!clientForm.confirmPassword.$error.match && clientForm.confirmPassword.$dirty"></span>
+    </div>
+
+    <div class="form-group has-feedback" ng-class="{'has-error':clientForm.firstname.$dirty && clientForm.firstname.$invalid, 'has-success':clientForm.firstname.$valid && clientForm.firstname.$dirty}">
+      <label for="firstName">First Name</label> 
+      <input type="text" name="firstname" placeholder="First Name" ng-model="client.firstname"  class="form-control" required>
+      <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="clientForm.firstname.$dirty && clientForm.firstname.$invalid"></span>
+      <span class="glyphicon glyphicon glyphicon-ok form-control-feedback" ng-show="clientForm.firstname.$valid && clientForm.firstname.$dirty"></span>
+    </div>
+    
+    <div class="form-group has-feedback" ng-class="{'has-error':clientForm.lastname.$dirty && clientForm.lastname.$invalid, 'has-success':clientForm.lastname.$valid && clientForm.lastname.$dirty}">
+      <label for="lastName">Last Name</label> 
+      <input type="text" name="lastname" placeholder="Last Name" ng-model="client.lastname"  class="form-control" required>
+      <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="clientForm.lastname.$dirty && clientForm.lastname.$invalid"></span>
+      <span class="glyphicon glyphicon glyphicon-ok form-control-feedback" ng-show="clientForm.lastname.$valid && clientForm.lastname.$dirty"></span>
+    </div>
+
+    <div class="divisor"><small>Todos los campos superiores son obligatorios.</small></div>
+
+    <div class="form-group has-feedback" ng-class="{'has-error':clientForm.firstname.$dirty && clientForm.firstname.$invalid, 'has-success':clientForm.firstname.$valid && clientForm.firstname.$dirty}" ng-show="mostrar">
+      <label for="bolicheName">Boliche Name</label> 
+      <input type="text" name="bolicheName" placeholder="Boliche Name" ng-model="client.bolicheName" class="form-control">
+      <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="clientForm.bolicheName.$dirty && clientForm.bolicheName.$invalid"></span>
+      <span class="glyphicon glyphicon glyphicon-ok form-control-feedback" ng-show="clientForm.bolicheName.$valid && clientForm.bolicheName.$dirty"></span>
+    </div>
+
+    <div class="form-group" ng-show="mostrar">
+      <label for="place">Search Place</label> 
+      <p class="input-group">
+        <input type="text"
+          placeholder="Search Address"
+          class="form-control"
+          ng-model="searchPlace" />
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default" 
+          ng-click="search()"
+          ng-disabled="searchForm.$invalid">
+          <i class="glyphicon glyphicon-search"></i></button>
+        </span>
+      </p>
+    </div>
+         
+    <div id="map" ng-show="mostrar"></div>
+
+    <div class="form-group" ng-show="mostrar">
+      <label for="address">Address</label> 
+      <input type="text" class="form-control" id="address" name="address" placeholder="Address" ng-model="client.address"  disabled>
+    </div>
+
+    <div class="form-group" ng-show="mostrar">
+      <label for="latitude">Latitude</label> 
+      <input type="text" class="form-control" id="latitude" name="latitude" placeholder="Latitude" ng-model="client.latitude"  disabled>
+    </div>
+
+    <div class="form-group" ng-show="mostrar">
+      <label for="longitude">Longitude</label> 
+      <input type="text" class="form-control" id="longitude" name="longitude" placeholder="Longitude" ng-model="client.longitude"  disabled>
+    </div>
+      
+    <div class="form-group has-feedback" ng-show="mostrar">
+      <label for="homePhone">Home Phone</label> 
+      <input type="text" class="form-control" id="homePhone" name="homePhone" placeholder="Home Phone" ng-model="client.homePhone" >
+    </div>
+
+    <div class="form-group">
+      <label for="cellPhone">Cell Phone</label> 
+      <input type="text" class="form-control" id="cellPhone" name="cellPhone" placeholder="Cell Phone" ng-model="client.cellPhone" >
+    </div>
+
+    <div class="form-group">
+      <label for="music">Music</label>
+      <div class="input-group">
+        <input type="text" class="form-control" id="music" name="music" placeholder="Music" ng-model="client.music.a" >
+        <span class="input-group-btn" style="top:-1px">
+          <button class="btn btn-default glyphicon glyphicon-plus" type="button" ng-click="addMusic()"></button>
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group" ng-show="isEven(myNumber)">
+      <div class="input-group">
+        <input 
+          type="text" 
+          class="form-control" 
+          id="musicMore" 
+          name="musicMore" 
+          placeholder="More Music" 
+          ng-model="client.music.b"
+        />
+        <span class="input-group-btn" style="top:-1px">
+          <button class="btn btn-default glyphicon glyphicon-remove btn-danger" type="button" ng-click="addMusic()"></button>
+        </span>
+      </div>
+    </div>   
+
+    <div class="form-group" ng-show="mostrar">
+      <label for="aniversary">Aniversary</label> 
+      <input type="text" id="aniversary" name="aniversary"
+        placeholder="dd/mm/yyyy"
+        class="form-control" 
+        data-ng-model="client.aniversary">
+    </div>
+
+    <div class="form-group" ng-show="!mostrar">
+      <label for="birthday">Birthday</label> 
+      <input type="text" id="birthday" name="birthday"
+        placeholder="dd/mm/yyyy"
+        class="form-control" 
+        data-ng-model="client.birthday">
+    </div>
+
+    <div class="form-group">
+      <label for="website">Website</label> 
+      <input type="url" class="form-control" id="website" name="website" placeholder="http://example.com" ng-model="client.website">
+    </div>
+
+
+    <div class="form-group">
+      <label for="logo">logo <small>100x100</small></label> 
+      <div class="input-group">
+        <span class="input-group-btn" style="top:-1px">
+          <button class="btn btn-default glyphicon glyphicon-remove" type="button" ng-click="eliminarArchivo('logo')"></button>
+        </span>
+        <input type="file" id="logo" name="logo" ng-file-model="client.logo" data-iconName="glyphicon glyphicon-inbox" accept="image/*">
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+          <img data-ng-src="{{client.logo.data}}" class="img-circle imagen" height="100" width="100" data-ng-model="client.logo">
+          <div class="imagenDatos">
+            <h3>{{client.logo.name}}</h3>
+            <p>{{client.logoText}}</p>
+          </div>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="logotext">logotext</label> 
+      <input class="form-control" id="logotext" name="logotext" placeholder="logotext" ng-model="client.logoText">
+    </div>
+
+    <div class="form-group">
+      <label for="imagen">imagen <small>400x600</small></label> 
+      <div class="input-group">
+        <span class="input-group-btn" style="top:-1px">
+          <button class="btn btn-default glyphicon glyphicon-remove" type="button" ng-click="eliminarArchivo('image')"></button>
+        </span>
+        <input type="file" id="image" name="image" ng-file-model="client.image" data-iconName="glyphicon glyphicon-inbox" accept="image/*" >
+      </div>
+    </div>  
+
+    <div class="row">
+      <div class="col-md-8">
+        <div class="thumbnail">
+          <img data-ng-src="{{client.image.data}}">
+          <div class="caption">
+            <h3>{{client.image.name}}</h3>
+            <p>{{client.imageText}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="imagenText">imagenText</label> 
+      <textarea type="text" class="form-control" id="imagenText" name="imagenText" placeholder="imagenText" rows="3" ng-model="client.imageText"></textarea>
+    </div>
+
+    <div class="form-group">
+      <div class="text-center">
+        <button data-loading-text="Saving Client..." type="submit" class="btn btn-primary btn-block" ng-click="saveClient(client)" ng-disabled="clientForm.$invalid">Save Client</button>
+      </div>
+    </div>
+    
+    <button class="btn btn-save btn-warning btn-block"
+      ng-click="clean()">Clean Form
+    </button>
+  </form>
+</div>
+<div class="modal-footer">
+    
+    <button  class="btn btn-primary btn-block"
+      ng-click="cancel()">Close
+    </button>
+</div>

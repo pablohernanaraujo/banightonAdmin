@@ -11,14 +11,16 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/angular-toggle-switch/style/bootstrap3/angular-toggle-switch-bootstrap-3.css" />
     <link rel="stylesheet" href="bower_components/bootstrap-table/src/bootstrap-table.css" />
+    <link rel="stylesheet" href="bower_components/angular-busy/dist/angular-busy.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
-    <!-- <link rel="stylesheet" href="styles/animate.css"> -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsDNAwAYh8pbarPkuU1vgQqZNSzShl0XE&amp;libraries=places"></script>
+    <link rel="stylesheet" href="styles/font-awesome.min.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="banightonAdminApp">
+  <body ng-app="banightonAdminApp" ng-cloak>
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -71,21 +73,32 @@
     <script src="bower_components/si-table/dist/si-table.js"></script>
     <script src="bower_components/bootstrap-table/src/bootstrap-table.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-busy/dist/angular-busy.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
+        <script src="scripts/bootstrap-filestyle.js"></script>
         
+        <script src="scripts/services/authenticationClients.js"></script>
         <script src="scripts/services/authentication.js"></script>
         <script src="scripts/services/password.js"></script>
-        <script src="scripts/services/client.js"></script>
-        <script src="scripts/bootstrap-filestyle.js"></script>
-
-        <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/services/notActive.js"></script>
+        <script src="scripts/services/paginate.js"></script>
+        <script src="scripts/services/map.js"></script>
+        <script src="scripts/services/dots.js"></script>
+        
         <script src="scripts/controllers/clients.js"></script>
+        <script src="scripts/controllers/login.js"></script>
         <script src="scripts/controllers/newUser.js"></script>
         <script src="scripts/controllers/editUser.js"></script>
+        <script src="scripts/controllers/activeUser.js"></script>
+        <script src="scripts/controllers/delete.js"></script>
+        <script src="scripts/controllers/deleteUser.js"></script>
+        <script src="scripts/controllers/newClient.js"></script>
+        <script src="scripts/controllers/editClient.js"></script>
+        <script src="scripts/controllers/activeClient.js"></script>
         <!-- endbuild -->
 </body>
 </html>

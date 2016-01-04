@@ -19,11 +19,16 @@
 			<span class="glyphicon glyphicon-remove form-control-feedback" ng-show="userForm.lastname.$dirty && userForm.lastname.$invalid"></span>
 			<span class="glyphicon glyphicon glyphicon-ok form-control-feedback" ng-show="userForm.lastname.$valid && userForm.lastname.$dirty"></span>
 		</div>
-		
-		<div class="form-group has-feedback" ng-class="{'has-error':userForm.nivel.$dirty && userForm.nivel.$invalid, 'has-success':userForm.nivel.$valid && userForm.nivel.$dirty}">
-			<input type="text" name="nivel" placeholder="Nivel" ng-model="user.nivel" required class="form-control">
-			<span class="glyphicon glyphicon-remove form-control-feedback" ng-show="userForm.nivel.$dirty && userForm.nivel.$invalid"></span>
-			<span class="glyphicon glyphicon glyphicon-ok form-control-feedback" ng-show="userForm.nivel.$valid && userForm.nivel.$dirty"></span>
+
+		<div class="form-group">
+			<select class="form-control"
+			name="nivel" 
+			ng-model="user.nivel"
+			>
+			   <option value="1">1</option>
+			   <option value="2">2</option>
+			   <option value="3">3</option>
+			</select>
 		</div>
 		
 
@@ -48,7 +53,7 @@
 </div>
 <div class="modal-footer">
     
-    <button  class="btn btn-danger btn-block"
+    <button  class="btn btn-primary btn-block"
     	ng-click="cancel()">Close
     </button>
 </div>
