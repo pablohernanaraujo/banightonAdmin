@@ -5,7 +5,9 @@ angular.module('banightonAdminApp')
     function ($scope, $rootScope, $uibModal, AuthenticationClients, $interval) {
 
     $rootScope.PAGE = 'clients';
-    
+
+    $scope.estatus = 'all';
+
     AuthenticationClients.online();
 
     var tiempo = 1;
@@ -42,6 +44,17 @@ angular.module('banightonAdminApp')
           }
         });
       }
+      if(where === 'editClientDj'){
+        $uibModal.open({
+          templateUrl: 'views/editClientDj.html',
+          controller: 'EditClientDjCtrl',
+          resolve: {
+            editClient: function () {
+              return client;
+            }
+          }
+        });
+      }
       if(where === 'activeClient'){
         $uibModal.open({
           templateUrl: 'views/activeClient.html',
@@ -68,7 +81,7 @@ angular.module('banightonAdminApp')
       }
     };
 
-    $scope.pageSize = 5;
+    $scope.pageSize = 10;
     $scope.currentPage = 1;
     
   }]);

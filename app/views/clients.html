@@ -1,4 +1,4 @@
-<div class="container">
+<div class="containerViews">
   <div ng-show="dataLoading" class="alert alert-info">
      
       <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
@@ -25,6 +25,16 @@
                 <input type="text" class="form-control" placeholder="Search"
                 ng-model="searchText">
               </div>
+              <div class="form-group">&nbsp;&nbsp;<strong>Status</strong>&nbsp;</div>
+              <div class="form-group">
+                <select class="form-control"
+                ng-model="estatus"
+                >
+                  <option value="all">All</option>
+                  <option value="active">Active</option>
+                  <option value="notactive">Not active</option>
+                </select>
+              </div>
               <button  ng-click="modal('newClient')" class="btn btn-success fa fa-user-plus" style="padding:9px"></button>
               
             </form>
@@ -45,8 +55,8 @@
         </thead>
         <tbody>
 
-          <tr ng-repeat="boliche in boliches | filter:searchText | orderBy:'client.bolicheName' | paginate:(currentPage-1)* pageSize | limitTo:pageSize" >
-            <th>{{ $index }}</th>
+          <tr ng-repeat="boliche in boliches | filter:searchText | orderBy:'client.bolicheName' | status:estatus  | paginate:(currentPage-1)* pageSize | limitTo:pageSize" >
+            <th>{{ $index +1 }}</th>
             <td>{{ boliche.client.bolicheName}}</td>
             <td>{{ boliche.client.email }}</td>
             <th>{{ boliche.client.address }}</th>
@@ -89,6 +99,16 @@
                 <input type="text" class="form-control" placeholder="Search"
                 ng-model="searchText">
               </div>
+              <div class="form-group">&nbsp;&nbsp;<strong>Status</strong>&nbsp;</div>
+              <div class="form-group">
+                <select class="form-control"
+                ng-model="estatus"
+                >
+                  <option value="all">All</option>
+                  <option value="active">Active</option>
+                  <option value="notactive">Not active</option>
+                </select>
+              </div>
               <button  ng-click="modal('newClient')" class="btn btn-success glyphicon fa fa-user-plus" style="padding:9px"></button>
               
             </form>
@@ -110,8 +130,8 @@
         </thead>
         <tbody>
 
-          <tr ng-repeat="dj in djs | filter:searchText | orderBy:'client.bolicheName' | paginate:(currentPage-1)* pageSize | limitTo:pageSize" ng-cloak >
-            <th>{{ $index }}</th>
+          <tr ng-repeat="dj in djs | filter:searchText | orderBy:'client.bolicheName'  | status:estatus  | paginate:(currentPage-1)* pageSize | limitTo:pageSize" ng-cloak >
+            <th>{{ $index + 1}}</th>
             <td>{{ dj.client.firstname }}</td>
             <td>{{ dj.client.lastname }}</td>
             <td>{{ dj.client.email }}</td>
@@ -121,7 +141,7 @@
               <span ng-show="dj.client.status === '0'" class="label label-default">not active</span>
             </td>
             <th>
-              <a ng-click="modal('editClient','{{ dj.client.regClient }}')" class="btn btn-sm text-primary fa fa-pencil-square-o fa-2x" style="padding:0 0 0 5px; margin:0"></a>
+              <a ng-click="modal('editClientDj','{{ dj.client.regClient }}')" class="btn btn-sm text-primary fa fa-pencil-square-o fa-2x" style="padding:0 0 0 5px; margin:0"></a>
             </th>
             <th>
               <a ng-click="modal('activeClient','{{ dj.client.regClient }}','sm')" class="btn text-warning fa fa-ban fa-2x" style="padding:0 0 0 5px; margin:0"></a>

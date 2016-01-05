@@ -31,7 +31,8 @@ angular.module('banightonAdminApp')
         this.marker = new google.maps.Marker({
             map: this.map,
             position: res.geometry.location,
-            animation: google.maps.Animation.DROP
+            animation: google.maps.Animation.DROP,
+            icon: './images/pin.png'
         });
         this.map.setCenter(res.geometry.location);
     };

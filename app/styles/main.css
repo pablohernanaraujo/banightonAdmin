@@ -161,6 +161,11 @@ body {
   
 }
 
+.containerViews{
+  width: 90%;
+  margin: 0 auto;
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .container {
