@@ -11,13 +11,11 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/angular-toggle-switch/style/bootstrap3/angular-toggle-switch-bootstrap-3.css" />
     <link rel="stylesheet" href="bower_components/bootstrap-table/src/bootstrap-table.css" />
-    <link rel="stylesheet" href="bower_components/angular-busy/dist/angular-busy.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsDNAwAYh8pbarPkuU1vgQqZNSzShl0XE&amp;libraries=places"></script>
-    <link rel="stylesheet" href="styles/font-awesome.min.css">
+    <link rel="stylesheet" href="styles/font-awesome.css">
     <!-- endbuild -->
   </head>
   <body ng-app="banightonAdminApp" ng-cloak>
@@ -70,14 +68,16 @@
     <script src="bower_components/firebase/firebase.js"></script>
     <script src="bower_components/angularfire/dist/angularfire.js"></script>
     <script src="bower_components/ng-file-model/ng-file-model.js"></script>
-    <script src="bower_components/si-table/dist/si-table.js"></script>
     <script src="bower_components/bootstrap-table/src/bootstrap-table.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="bower_components/angular-busy/dist/angular-busy.js"></script>
+    <script src="bower_components/angular-simple-logger/dist/angular-simple-logger.js"></script>
+    <script src="bower_components/lodash/lodash.js"></script>
+    <script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsDNAwAYh8pbarPkuU1vgQqZNSzShl0XE&amp;libraries=places"></script>
         <script src="scripts/app.js"></script>
         <script src="scripts/bootstrap-filestyle.js"></script>
         
