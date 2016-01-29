@@ -25,6 +25,14 @@ angular.module('banightonAdminApp')
     			var users = $firebaseArray(refUsers);
     			$rootScope.users = users;
     			$rootScope.dataLoading = false;
+
+                var filtered = [];
+                angular.forEach(users, function(value) {
+                    if(value.user.status === '0'){
+                        filtered.push(value);
+                    }
+                });
+                $rootScope.notActiveUsers = filtered;
     		},
     		onlineActive: function(){
     			

@@ -1,57 +1,190 @@
 <div class="containerViews">
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand">Delete users</a>
-			</div>
-		    <!-- Collect the nav links, forms, and other content for toggling -->
-		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<form class="navbar-form navbar-left" role="search">
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Search"
-					ng-model="searchText">
-				</div>				
-			</form>
-		</div>
-	</div>
-</nav>
-	<table class="table table-striped table-curved">
-		<thead>
-			<tr>
-				<th>#</th>
-				<th>First Name</th>
-				<th>Last Name</th>
-				<th>Email</th>
-				<th>Nivel</th>
-				<th>Status</th>
-				<th>Delete</th>
-			</tr>
-		</thead>
-		<tbody>
-			<!-- <tr ng-repeat="user in notActiveUsers = (users | notActive:(currentPage-1)* pageSize  )| filter:searchText | orderBy:'user.firstname' | limitTo:5"> -->
-			<tr ng-repeat="user in notActiveUsers | notActive:(currentPage-1)* pageSize | filter:searchText | orderBy:'user.firstname' | limitTo:5">
-				<th>{{ $index + 1 }}</th>
-				<td>{{ user.user.firstname }}</td>
-				<td>{{ user.user.lastname }}</td>
-				<td>{{ user.user.email }}</td>
-				<th>{{ user.user.nivel }}</th>
-				<td>
-					<span ng-show="user.user.status === '1'" class="label label-success">active</span>
-					<span ng-show="user.user.status === '0'" class="label label-default">not active</span>
-				</td>
-				<th>
-					<a ng-click="modal('deleteUser','{{ user.user.regUser }}','sm')" class="btn text-danger fa fa-trash-o fa-2x" style="padding:0 0 0 5px; margin:0"></a>
-				</th>
-			</tr>
-		</tbody>
-	</table>
-	<uib-pagination total-items="notActiveUsers.length" ng-model="currentPage" max-size="pageSize" class="pagination-sm" boundary-links="true" items-per-page="pageSize"></uib-pagination>
+	<div ng-show="dataLoading" class="alert alert-info">
+         <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+    </div>
+
+	<uib-tabset Boliches="true">
+		<uib-tab heading="Boliches">
+
+			<nav class="navbar">
+		        <div class="container-fluid">
+		          <!-- Brand and toggle get grouped for better mobile display -->
+		          <div class="navbar-header">
+		            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		              <span class="sr-only">Toggle navigation</span>
+		              <span class="icon-bar"></span>
+		              <span class="icon-bar"></span>
+		              <span class="icon-bar"></span>
+		            </button>
+		            <div class="navbar-brand">Boliches</div>
+		          </div>
+		            <!-- Collect the nav links, forms, and other content for toggling -->
+		            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		            <form class="navbar-form navbar-left" role="search">
+		              <div class="form-group">
+		                <input type="text" class="form-control" placeholder="Search"
+		                ng-model="searchText">
+		              </div>
+		              
+		            </form>
+		          </div><!-- /.navbar-collapse -->
+		        </div><!-- /.container-fluid -->
+		      </nav>
+		      <table class="table table-striped table-curved">
+		        <thead>
+		          <tr>
+		            <th>#</th>
+		            <th>Boliche</th>
+		            <th>Email</th>
+		            <th>Address</th>
+		            <th>Status</th>
+		            <th>Delete</th>
+		          </tr>
+		        </thead>
+		        <tbody>
+
+		          <tr ng-repeat="boliche in notActiveClients | filter:searchText | orderBy:'client.bolicheName' | paginate:(currentPage-1)* pageSize | limitTo:pageSize" >
+		            <th>{{ $index +1 }}</th>
+		            <td>{{ boliche.client.bolicheName}}</td>
+		            <td>{{ boliche.client.email }}</td>
+		            <th>{{ boliche.client.address }}</th>
+		            <td>
+		              <span ng-show="boliche.client.status === '1'" class="label label-success">active</span>
+		              <span ng-show="boliche.client.status === '0'" class="label label-default">not active</span>
+		            </td>
+		            <th>
+						<a ng-click="modal('deleteClient','{{ boliche.client.regClient }}','sm')" class="btn text-danger fa fa-trash-o fa-2x" style="padding:0 0 0 5px; margin:0"></a>
+					</th>
+		          </tr>
+		        </tbody>
+		      </table>
+		      
+
+		      <uib-pagination total-items="boliches.length" ng-model="currentPage" max-size="pageSize" class="pagination-sm" boundary-links="true" items-per-page="pageSize"></uib-pagination>
+
+		</uib-tab>
+		<uib-tab heading="Dj">
+
+			<nav class="navbar">
+		        <div class="container-fluid">
+		          <!-- Brand and toggle get grouped for better mobile display -->
+		          <div class="navbar-header">
+		            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		              <span class="sr-only">Toggle navigation</span>
+		              <span class="icon-bar"></span>
+		              <span class="icon-bar"></span>
+		              <span class="icon-bar"></span>
+		            </button>
+		            <div class="navbar-brand">Djs</div>
+		          </div>
+		            <!-- Collect the nav links, forms, and other content for toggling -->
+		            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		            <form class="navbar-form navbar-left" role="search">
+		              <div class="form-group">
+		                <input type="text" class="form-control" placeholder="Search"
+		                ng-model="searchText">
+		              </div>
+		              
+		            </form>
+		          </div><!-- /.navbar-collapse -->
+		        </div><!-- /.container-fluid -->
+		      </nav>
+		      <table class="table table-striped table-curved">
+		        <thead>
+		          <tr>
+		            <th>#</th>
+		            <th>First Name</th>
+		            <th>Last Name</th>
+		            <th>Email</th>
+		            <th>Client</th>
+		            <th>Status</th>
+		            <th>Delete</th>
+		          </tr>
+		        </thead>
+		        <tbody>
+
+		          <tr ng-repeat="dj in notActiveClientsDj | filter:searchText | orderBy:'client.bolicheName' | paginate:(currentPage-1)* pageSize | limitTo:pageSize" ng-cloak >
+		            <th>{{ $index + 1}}</th>
+		            <td>{{ dj.client.firstname }}</td>
+		            <td>{{ dj.client.lastname }}</td>
+		            <td>{{ dj.client.email }}</td>
+		            <th>{{ dj.client.client }}</th>
+		            <td>
+		              <span ng-show="dj.client.status === '1'" class="label label-success">active</span>
+		              <span ng-show="dj.client.status === '0'" class="label label-default">not active</span>
+		            </td>
+		            <th>
+						<a ng-click="modal('deleteClient','{{ dj.client.regClient }}','sm')" class="btn text-danger fa fa-trash-o fa-2x" style="padding:0 0 0 5px; margin:0"></a>
+					</th>
+		          </tr>
+		        </tbody>
+		      </table>
+		      
+
+		      <uib-pagination total-items="djs.length" ng-model="currentPage" max-size="pageSize" class="pagination-sm" boundary-links="true" items-per-page="pageSize"></uib-pagination>
+
+		</uib-tab>
+		<uib-tab heading="users">
+
+			<nav class="navbar">
+				<div class="container-fluid">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand">Delete users</a>
+					</div>
+				    <!-- Collect the nav links, forms, and other content for toggling -->
+				    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<form class="navbar-form navbar-left" role="search">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Search"
+							ng-model="searchText">
+						</div>				
+					</form>
+				</div>
+			</nav>
+			<table class="table table-striped table-curved">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Email</th>
+						<th>Nivel</th>
+						<th>Status</th>
+						<th>Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="user in notActiveUsers | notActive:(currentPage-1)* pageSize | filter:searchText | orderBy:'user.firstname' | limitTo:5">
+						<th>{{ $index + 1 }}</th>
+						<td>{{ user.user.firstname }}</td>
+						<td>{{ user.user.lastname }}</td>
+						<td>{{ user.user.email }}</td>
+						<th>{{ user.user.nivel }}</th>
+						<td>
+							<span ng-show="user.user.status === '1'" class="label label-success">active</span>
+							<span ng-show="user.user.status === '0'" class="label label-default">not active</span>
+						</td>
+						<th>
+							<a ng-click="modal('deleteUser','{{ user.user.regUser }}','sm')" class="btn text-danger fa fa-trash-o fa-2x" style="padding:0 0 0 5px; margin:0"></a>
+						</th>
+					</tr>
+				</tbody>
+			</table>
+			<uib-pagination total-items="notActiveUsers.length" ng-model="currentPage" max-size="pageSize" class="pagination-sm" boundary-links="true" items-per-page="pageSize"></uib-pagination>
+
+		</uib-tab>
+	</uib-tabset>
+
+
+
+
+	
 
 </div>

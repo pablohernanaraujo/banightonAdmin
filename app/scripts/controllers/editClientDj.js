@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('banightonAdminApp')
-  .controller('EditClientCtrlDj',['$scope', '$uibModalInstance', 
-    'Authentication', 'editClient', '$firebaseObject', 'fire', 'Map', '$timeout', 
+  .controller('EditClientDjCtrl',['$scope', '$uibModalInstance', 
+    'Authentication', 'editClient', '$firebaseObject', 'fire', 
     function ($scope, $uibModalInstance, Authentication, editUser, 
-      $firebaseObject, fire, Map, $timeout) {  
+      $firebaseObject, fire) {  
 
     var ref = new Firebase(fire.clients+'/clients/'+editUser);
     var cliente = $firebaseObject(ref);

@@ -14,36 +14,33 @@ angular.module('banightonAdminApp')
                 $rootScope.dataLoading = true;
                 refClients.on('value', function(snap){
                     var boliches = snap.val();
+
                     var bolichesFiltered = [];
                     var djsFiltered = [];
+                    var bolichesFilteredActive = [];
+                    var djsFilteredActive = [];
+
                     angular.forEach(boliches, function(value) {
-                        if(value.client.client === 'Boliche'){
+                        if(value.user.client === 'Boliche'){
                             bolichesFiltered.push(value);
-                            
+                            if(value.user.status === '0'){
+                                bolichesFilteredActive.push(value);
+                            }
                         }else{
                             djsFiltered.push(value);
+                            if(value.user.status === '0'){
+                                djsFilteredActive.push(value);
+                            }
                         }
                     });
                     $rootScope.boliches = bolichesFiltered;
                     $rootScope.djs = djsFiltered;
+
+                    $rootScope.notActiveClients = bolichesFilteredActive;
+                    $rootScope.notActiveClientsDj = djsFilteredActive;
+
                     $rootScope.dataLoading = false;
-                    // console.log($rootScope.boliches);
-                    // console.log($rootScope.djs);
                 });
-    		},
-    		onlineActive: function(){
-    			
-    			refClients.on('value', function(snap){
-    				var clients = snap.val();
-    				var filtered = [];
-    				angular.forEach(clients, function(value) {
-						if(value.client.status === '0'){
-					 		filtered.push(value);
-						}
-					});
-					$rootScope.notActiveClients = filtered;
-    			});
-    			
     		},
 
     		register: function(client){

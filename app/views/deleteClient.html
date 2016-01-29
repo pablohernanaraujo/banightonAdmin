@@ -1,0 +1,29 @@
+<div class="modal-header">
+	<h2>Delete</h2>
+	<p>You sure want delete client?</p>
+</div>
+<div class="modal-body">
+	<form name="myform"
+		novalidate>
+		
+		<div ng-show="client !== ''" class="form-group">
+			{{client.bolicheName}}
+		</div>
+		<div ng-show="client !== ''" class="form-group">
+			{{client.firstname}}
+		</div>
+		<div ng-show="client === ''"class="form-group">
+			The client will by delete!
+		</div>
+	</form>
+	<button ng-show="client !== ''"  class="btn btn-danger btn-block"
+    	ng-click="client.$remove('{{client}}')">Delete
+    </button>
+
+</div>
+<div class="modal-footer">
+    
+    <button  class="btn btn-primary btn-block"
+    	ng-click="cancel()">Close
+    </button>
+</div>

@@ -55,20 +55,20 @@
         </thead>
         <tbody>
 
-          <tr ng-repeat="boliche in boliches | filter:searchText | orderBy:'client.bolicheName' | status:estatus  | paginate:(currentPage-1)* pageSize | limitTo:pageSize" >
+          <tr ng-repeat="boliche in boliches | filter:searchText | orderBy:'user.bolicheName' | status:estatus  | paginate:(currentPage-1)* pageSize | limitTo:pageSize" >
             <th>{{ $index +1 }}</th>
-            <td>{{ boliche.client.bolicheName}}</td>
-            <td>{{ boliche.client.email }}</td>
-            <th>{{ boliche.client.address }}</th>
+            <td>{{ boliche.user.bolicheName}}</td>
+            <td>{{ boliche.user.email }}</td>
+            <th>{{ boliche.user.address }}</th>
             <td>
-              <span ng-show="boliche.client.status === '1'" class="label label-success">active</span>
-              <span ng-show="boliche.client.status === '0'" class="label label-default">not active</span>
+              <span ng-show="boliche.user.status === '1'" class="label label-success">active</span>
+              <span ng-show="boliche.user.status === '0'" class="label label-default">not active</span>
             </td>
             <th>
-              <a ng-click="modal('editClient','{{ boliche.client.regClient }}')" class="btn btn-sm text-primary fa fa-pencil-square-o fa-2x" style="padding:0 0 0 5px; margin:0"></a>
+              <a ng-click="modal('editClient','{{ boliche.user.regUser }}')" class="btn btn-sm text-primary fa fa-pencil-square-o fa-2x" style="padding:0 0 0 5px; margin:0"></a>
             </th>
             <th>
-              <a ng-click="modal('activeClient','{{ boliche.client.regClient }}','sm')" class="btn text-warning fa fa-ban fa-2x" style="padding:0 0 0 5px; margin:0"></a>
+              <a ng-click="modal('activeClient','{{ boliche.user.regUser }}','sm')" class="btn text-warning fa fa-ban fa-2x" style="padding:0 0 0 5px; margin:0"></a>
             </th>
           </tr>
         </tbody>
@@ -130,21 +130,21 @@
         </thead>
         <tbody>
 
-          <tr ng-repeat="dj in djs | filter:searchText | orderBy:'client.bolicheName'  | status:estatus  | paginate:(currentPage-1)* pageSize | limitTo:pageSize" ng-cloak >
+          <tr ng-repeat="dj in djs | filter:searchText | orderBy:'user.bolicheName'  | status:estatus  | paginate:(currentPage-1)* pageSize | limitTo:pageSize" ng-cloak >
             <th>{{ $index + 1}}</th>
-            <td>{{ dj.client.firstname }}</td>
-            <td>{{ dj.client.lastname }}</td>
-            <td>{{ dj.client.email }}</td>
-            <th>{{ dj.client.client }}</th>
+            <td>{{ dj.user.firstname }}</td>
+            <td>{{ dj.user.lastname }}</td>
+            <td>{{ dj.user.email }}</td>
+            <th>{{ dj.user.client }}</th>
             <td>
-              <span ng-show="dj.client.status === '1'" class="label label-success">active</span>
-              <span ng-show="dj.client.status === '0'" class="label label-default">not active</span>
+              <span ng-show="dj.user.status === '1'" class="label label-success">active</span>
+              <span ng-show="dj.user.status === '0'" class="label label-default">not active</span>
             </td>
             <th>
-              <a ng-click="modal('editClientDj','{{ dj.client.regClient }}')" class="btn btn-sm text-primary fa fa-pencil-square-o fa-2x" style="padding:0 0 0 5px; margin:0"></a>
+              <a ng-click="modal('editClientDj','{{ dj.user.regUser }}')" class="btn btn-sm text-primary fa fa-pencil-square-o fa-2x" style="padding:0 0 0 5px; margin:0"></a>
             </th>
             <th>
-              <a ng-click="modal('activeClient','{{ dj.client.regClient }}','sm')" class="btn text-warning fa fa-ban fa-2x" style="padding:0 0 0 5px; margin:0"></a>
+              <a ng-click="modal('activeClient','{{ dj.user.regUser }}','sm')" class="btn text-warning fa fa-ban fa-2x" style="padding:0 0 0 5px; margin:0"></a>
             </th>
           </tr>
         </tbody>
@@ -157,5 +157,3 @@
   </uib-tabset>
       
 </div>
-<!-- <div>{{tiempo}}</div>
-<div>{{boliches}}</div> -->

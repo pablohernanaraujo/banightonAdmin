@@ -11,7 +11,7 @@ angular.module('banightonAdminApp')
 
     cliente.$loaded().then(function(){
       $scope.cliente = cliente;
-      $scope.client = $firebaseObject(ref.child('client'));
+      $scope.client = $firebaseObject(ref.child('user'));
     });
 
     $scope.cancel = function () {
